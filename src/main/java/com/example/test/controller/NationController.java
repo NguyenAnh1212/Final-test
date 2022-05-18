@@ -1,5 +1,6 @@
 package com.example.test.controller;
 
+import com.example.test.model.City;
 import com.example.test.model.Nation;
 import com.example.test.service.nation.INationSV;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,13 @@ public class NationController {
     @PostMapping
     public ResponseEntity<Nation> saveNation(@RequestBody Nation nation){
         return new ResponseEntity<>(nationSV.save(nation), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Nation> update(@PathVariable Long id, @RequestBody Nation nation){
+        nation.setId(id);
+        nationSV.save(nation);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")

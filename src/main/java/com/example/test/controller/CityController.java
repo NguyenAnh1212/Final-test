@@ -38,6 +38,14 @@ public class CityController {
         return new ResponseEntity<>(citySV.save(city), HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<City> update(@PathVariable Long id, @RequestBody City city){
+        city.setId(id);
+        citySV.save(city);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<City> delete(@PathVariable Long id){
        Optional<City> cityOptional = citySV.findById(id);
